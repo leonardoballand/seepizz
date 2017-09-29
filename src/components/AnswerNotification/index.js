@@ -1,0 +1,55 @@
+import React, { Component } from 'react'
+import { Animated, View, Text, Image } from 'react-native'
+
+import styles from './styles'
+
+const ThingToFind = 'Pizza'
+
+class AnswerNotification extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      slideAnim: new Animated.Value(-100),
+    }
+  }
+
+  componentDidMount() {
+    Animated.spring(
+      this.state.slideAnim,
+      {
+        toValue: 0,
+        useNativeDriver: true,
+      }
+    ).start()
+  }
+
+  render () {
+    const isValid = this.props.answer === ThingToFind
+    const icon = isValid ? require('../../assets/valid.png') : require('../../assets/error.png')
+
+    const notifStyles = [styles.container]
+
+    if (isValid) {
+      notifStyles.push(styles.notifValid)
+    } else {
+      notifStyles.push(styles.notifError)
+    }
+
+    return (
+      <Animated.View
+        style={[...notifStyles, {transform: [
+              { translateY: this.state.slideAnim }
+            ]}
+        ]}
+      >
+        <Text style={styles.text}>
+          {this.props.answer}
+        </Text>
+        <Image source={icon} style={styles.icon}/>
+      </Animated.View>
+    )
+  }
+}
+
+export default AnswerNotification
