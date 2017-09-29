@@ -30,7 +30,8 @@ build/
 local.properties
 *.iml
 
-# env prod file
+# env files
+.env
 .env.prod
 
 # node.js

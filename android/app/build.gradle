@@ -107,12 +107,10 @@ android {
 
     signingConfigs {
         release {
-            if (project.env.get("STORE_FILE")) {
-                storeFile file(project.env.get("STORE_FILE"))
-                storePassword project.env.get("STORE_PASSWORD")
-                keyAlias project.env.get("KEY_ALIAS")
-                keyPassword project.env.get("KEY_PASSWORD")
-            }
+            storeFile file(SEEPIZZ_RELEASE_STORE_FILE)
+            storePassword SEEPIZZ_RELEASE_STORE_PASSWORD
+            keyAlias SEEPIZZ_RELEASE_KEY_ALIAS
+            keyPassword SEEPIZZ_RELEASE_KEY_PASSWORD
         }
     }
 
@@ -152,6 +150,7 @@ dependencies {
     compile project(':react-native-config')
     compile project(':react-native-image-picker')
     compile project(':react-native-share')
+    compile project(":react-native-hockeyapp")
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules

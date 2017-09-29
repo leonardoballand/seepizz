@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, View, TouchableOpacity, Text, Image, Dimensions, StatusBar, Alert } from 'react-native'
 import { NavigationActions } from 'react-navigation'
-import Config from 'react-native-config'
+import { CLARIFAY_KEY } from 'react-native-dotenv'
 import Clarifai from 'clarifai'
 
 import BackgroundImage from '../../components/BackgroundImage'
@@ -35,7 +35,7 @@ class PredictScreen extends Component {
 
   componentDidMount() {
     const clarifai = new Clarifai.App({
-      apiKey: Config.CLARIFAY_KEY
+      apiKey: CLARIFAY_KEY
     })
 
     process.nextTick = setImmediate // RN polyfill
