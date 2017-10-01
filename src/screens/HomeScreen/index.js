@@ -56,16 +56,15 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
           <StatusBar hidden />
-          {
-            !this.state.loading ?
-                <BackgroundImage source={require('../../assets/bkg.jpg')}>
+          <BackgroundImage source={require('../../assets/bkg.jpg')}>
+              {
+                !this.state.loading ?
                   <XPButton
                     title='Analyser une image'
                     onPress={this._onClick}
-                  />
-                </BackgroundImage>
-            : <ActivityIndicator size="large" />
-          }
+                  /> :
+                    <ActivityIndicator size="large" />
+          </BackgroundImage>
       </View>
     )
   }
