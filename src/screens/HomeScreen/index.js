@@ -41,13 +41,17 @@ class HomeScreen extends Component {
     this.setState({loading: true})
 
     ImagePicker.showImagePicker(this.options, response => {
-      if (response.error) {
+      if (response.didCancel) {
+        this.setState({loading: false})
+      }else if (response.error) {
         Alert.alert('Erreur', 'Vérifiez vos permissions aux albums photos et à la caméra.', {cancelable: false})
       } else {
         const { navigate } = this.props.navigation
         navigate('Prediction', { image: response })
       }
-      this.setState({loading: false})
+      if (this.state.loading) {
+        this.setState({loading: false})
+      }
     })
 
   }
@@ -56,16 +60,16 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
           <StatusBar hidden />
-          {
-            !this.state.loading ?
-                <BackgroundImage source={require('../../assets/bkg.jpg')}>
+          <BackgroundImage source={require('../../assets/bkg.jpg')}>
+            {
+              !this.state.loading ?
                   <XPButton
                     title='Analyser une image'
                     onPress={this._onClick}
                   />
-                </BackgroundImage>
-            : <ActivityIndicator size="large" />
-          }
+              : <ActivityIndicator size="large" color="#e74c3c" />
+            }
+          </BackgroundImage>
       </View>
     )
   }
