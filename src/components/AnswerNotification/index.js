@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Animated, View, Text, Image } from 'react-native'
+import { Animated, Text, Image } from 'react-native'
+import PropTypes from 'prop-types'
 
 import styles from './styles'
 
@@ -50,6 +51,10 @@ class AnswerNotification extends Component {
       </Animated.View>
     )
   }
+}
+
+AnswerNotification.propTypes = {
+  answer: PropTypes.string
 }
 
 export default AnswerNotification

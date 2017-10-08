@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Alert, View, Text, StatusBar, ActivityIndicator } from 'react-native'
+import { Alert, View, StatusBar, ActivityIndicator } from 'react-native'
+import PropTypes from 'prop-types'
+
 import ImagePicker from 'react-native-image-picker'
 
 import Header from '../../components/Header'
@@ -33,13 +35,11 @@ class HomeScreen extends Component {
         skipBackup: true,
         path: 'Seepizz'
       }
-    }
-    
+    }    
   }
 
   _onClick() {
     this.setState({loading: true})
-
     ImagePicker.showImagePicker(this.options, response => {
       if (response.didCancel) {
         this.setState({loading: false})
@@ -53,7 +53,6 @@ class HomeScreen extends Component {
         this.setState({loading: false})
       }
     })
-
   }
 
   render() {
@@ -73,6 +72,10 @@ class HomeScreen extends Component {
       </View>
     )
   }
+}
+
+HomeScreen.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default HomeScreen

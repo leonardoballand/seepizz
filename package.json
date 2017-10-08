@@ -5,12 +5,14 @@
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"test": "jest",
+		"lint": "eslint --ext .js src/",
 		"android-dev": "ENVFILE=.env.dev react-native run-android",
 		"android-prod": "ENVFILE=.env.prod react-native run-android",
 		"build-android-prod": "export ENVFILE=.env.prod && cd android && ./gradlew assembleRelease && cd .."
 	},
 	"dependencies": {
 		"clarifai": "^2.4.0",
+		"prop-types": "^15.6.0",
 		"react": "16.0.0-alpha.12",
 		"react-native": "0.48.4",
 		"react-native-config": "^0.7.1",
@@ -21,8 +23,11 @@
 		"react-navigation": "^1.0.0-beta.13"
 	},
 	"devDependencies": {
+		"babel-eslint": "^8.0.1",
 		"babel-jest": "21.2.0",
 		"babel-preset-react-native": "4.0.0",
+		"eslint": "^4.8.0",
+		"eslint-plugin-react": "^7.4.0",
 		"jest": "21.2.1",
 		"react-native-dotenv": "^0.1.0",
 		"react-test-renderer": "16.0.0-alpha.12"

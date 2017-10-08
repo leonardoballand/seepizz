@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet } from 'react-native'
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     top: 0,
@@ -10,6 +10,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'stretch',
   },
   notifValid: {
     backgroundColor: 'green',
@@ -27,6 +28,6 @@ const styles = {
     height: 30,
     margin: 5,
   }
-}
+})
 
 export default styles

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, View, TouchableOpacity, Text, Image, Dimensions, StatusBar, Alert } from 'react-native'
+import { ActivityIndicator, View, Text, StatusBar, Alert, } from 'react-native'
+import PropTypes from 'prop-types'
+
 import { NavigationActions } from 'react-navigation'
 import { CLARIFAY_KEY } from 'react-native-dotenv'
 import Clarifai from 'clarifai'
@@ -49,9 +51,8 @@ class PredictScreen extends Component {
 
         if (concepts && concepts.length > 0) {
           for (const prediction of concepts) {
-            if (prediction.name === 'pizza' && prediction.value > 0.85) {
-              this.setState({loading: false, result: 'Pizza'})
-              return
+            if (prediction.name === 'pizza' && prediction.value > 0.9) {
+              return this.setState({loading: false, result: 'Pizza'})
             }
             this.setState({result: 'Not Pizza'})
           }
@@ -77,47 +78,41 @@ class PredictScreen extends Component {
   }
 
   render() {
-    const { width, height } = Dimensions.get('window')
     const { type, data } = this.state.image
     const sourceImage = `data:${type};base64,${data}`
 
-    if (this.state.loading) {
-      return (
-        <View style={styles.container}>
-          <StatusBar hidden />
-          <TouchableOpacity onPress={this._cancel}>
-            <Image
-              style={{width: width, height: height}}
-              source={{uri: sourceImage}}
-              resizeMode='contain'
-            />
+    return (
+      <BackgroundImage source={{uri: sourceImage}} resizeMode='cover'>
+        <StatusBar hidden />
+        { 
+          this.state.loading ?
             <View style={styles.loader}>
               <ActivityIndicator size={75} color='#95a5a6' />
               <Text style={{color: 'white', fontSize: 16}}>Analyse en cours...</Text>
+            </View> :
+            <View style={styles.container}>
+              <AnswerNotification answer={this.state.result} />
+              <CaptureAndShare
+                title='Partager'
+                color='#3498db'
+                image={sourceImage}
+                onCancel={this._cancel}
+              />
+              <XPButton
+                title='Non merci'
+                color='black'
+                textOnly
+                onPress={this._cancel}
+              />
             </View>
-        </TouchableOpacity>
-      </View>
-      )
-    } else {
-      return (
-        <BackgroundImage source={{uri: sourceImage}} resizeMode='contain'>
-          <StatusBar hidden />
-          <AnswerNotification answer={this.state.result} />
-          <CaptureAndShare
-            title='Partager'
-            color='#3498db'
-            image={sourceImage}
-          />
-          <XPButton
-            title='Non merci'
-            color='black'
-            textOnly
-            onPress={this._cancel}
-          />
-        </BackgroundImage>
-      )
-    }
+        }
+      </BackgroundImage>
+    )
   }
+}
+
+PredictScreen.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default PredictScreen

@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, Platform, TouchableNativeFeedback, TouchableOpacity } from 'react-native'
+import PropTypes from 'prop-types'
 
 import styles from './styles'
 
@@ -54,6 +55,16 @@ const XPButton = (props) => {
       </View>
     </TouchKey>
   )
+}
+
+XPButton.propTypes = {
+  title: PropTypes.string,
+  color: PropTypes.string,
+  accessibilityLabel: PropTypes.string,
+  disabled: PropTypes.bool,
+  textOnly: PropTypes.bool,
+  onPress: PropTypes.func,
+  onLongPress: PropTypes.func,
 }
 
 export default XPButton
