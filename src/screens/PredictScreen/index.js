@@ -23,16 +23,10 @@ class PredictScreen extends Component {
 
     this.state = {
       loading: true,
-      result: false,
-      image: null,
+      result: '',
     }
 
     this._cancel = this._cancel.bind(this)
-  }
-
-  componentWillMount() {
-    const { params } = this.props.navigation.state
-    this.setState({image: params.image})
   }
 
   componentDidMount() {
@@ -42,30 +36,31 @@ class PredictScreen extends Component {
 
     process.nextTick = setImmediate // RN polyfill
 
-    const { data } = this.state.image
+    const { data } = this.props.navigation.state.params.image
     const file = { base64: data }
     
-    clarifai.models.predict(Clarifai.FOOD_MODEL, file)
+    clarifai.models.predict(Clarifai.GENERAL_MODEL, file)
       .then(response => {
+        console.log('GENERAL_MODEL response', response)
         const { concepts } = response.outputs[0].data
 
         if (concepts && concepts.length > 0) {
           for (const prediction of concepts) {
-            if (prediction.name === 'pizza' && prediction.value > 0.9) {
-              return this.setState({loading: false, result: 'Pizza'})
+            if (prediction.name === 'pizza' && prediction.value >= 0.99) {
+              return this.setState({ loading: false, result: 'Pizza' })
             }
-            this.setState({result: 'Not Pizza'})
+            this.setState({ result: 'Not Pizza' })
           }
         }
 
-        this.setState({loading: false})
+        this.setState({ loading: false })
       })
       .catch(e => {
         Alert.alert(
           'Une erreur est survenue',
           'Désolé, le quota est peut-être dépassé, réessaye plus tard !',
           [
-            {text: 'OK', onPress: () => this._cancel()},
+            { text: 'OK', onPress: () => this._cancel() },
           ],
           { cancelable: false }
         )
@@ -78,7 +73,7 @@ class PredictScreen extends Component {
   }
 
   render() {
-    const { type, data } = this.state.image
+    const { type, data } = this.props.navigation.state.params.image
     const sourceImage = `data:${type};base64,${data}`
 
     return (
@@ -88,7 +83,7 @@ class PredictScreen extends Component {
           this.state.loading ?
             <View style={styles.loader}>
               <ActivityIndicator size={75} color='#95a5a6' />
-              <Text style={{color: 'white', fontSize: 16}}>Analyse en cours...</Text>
+              <Text style={styles.loaderText}>Analyse en cours...</Text>
             </View> :
             <View style={styles.container}>
               <AnswerNotification answer={this.state.result} />

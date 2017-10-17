@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Platform } from 'react-native'
+import { View, Image } from 'react-native'
 import PropTypes from 'prop-types'
 
 import styles from './styles'
@@ -16,10 +16,8 @@ const BackgroundImage = (props) => {
     containerStyles.push({resizeMode: resizeMode})
   }
 
-  const optimizer = Platform.OS === 'android' ? 'renderToHardwareTextureAndroid' : null
-
   return (
-    <View optimizer style={{flex: 1, alignSelf: 'stretch'}}>
+    <View style={styles.container}>
       <Image source={props.source} style={containerStyles}>
         {props.children}
       </Image>
@@ -29,8 +27,16 @@ const BackgroundImage = (props) => {
 
 BackgroundImage.propTypes = {
   resizeMode: PropTypes.string,
-  source: PropTypes.string,
-  children: PropTypes.children
+  source: PropTypes.oneOfType([
+    PropTypes.shape({
+      uri: PropTypes.string,
+    }),
+    PropTypes.number,
+  ]),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired
 }
 
 export default BackgroundImage

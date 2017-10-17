@@ -1,5 +1,8 @@
 import { StyleSheet } from 'react-native'
 
+const blackTransparent = 'rgba(0,0,0,0.75)'
+const white = 'rgba(255,255,255,1.0)'
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -16,8 +19,12 @@ const styles = StyleSheet.create({
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.75)',
-  }
+    backgroundColor: blackTransparent,
+  },
+  loaderText: {
+    color: white,
+    fontSize: 16,
+  },
 })
 
 export default styles

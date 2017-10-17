@@ -1,5 +1,11 @@
 import { StyleSheet } from 'react-native'
 
+const colors = {
+  red: '#e74c3c',
+  white: 'rgb(255,255,255)',
+  black: 'rgb(0,0,0)',
+}
+
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
@@ -8,29 +14,29 @@ const styles = StyleSheet.create({
   },
   titleWrapper: {
     height: 80,
-    backgroundColor: '#e74c3c',
+    backgroundColor: colors.red,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 3,
-    borderColor: 'black',
+    borderColor: colors.black,
   },
   title: {
-    color: 'white',
+    color: colors.white,
     fontSize: 50,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   subtitleWrapper: {
     height: 40,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 3,
-    borderColor: 'black',
+    borderColor: colors.black,
   },
   subtitle: {
-    color: '#e74c3c',
+    color: colors.red,
     fontSize: 25,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
 })
 

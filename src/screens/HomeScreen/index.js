@@ -39,18 +39,17 @@ class HomeScreen extends Component {
   }
 
   _onClick() {
-    this.setState({loading: true})
+    this.setState({ loading: true })
     ImagePicker.showImagePicker(this.options, response => {
       if (response.didCancel) {
-        this.setState({loading: false})
-      }else if (response.error) {
-        Alert.alert('Erreur', 'Vérifiez vos permissions aux albums photos et à la caméra.', {cancelable: false})
+        this.setState({ loading: false })
+      } else if (response.error) {
+        Alert.alert('Erreur', 'Vérifiez vos permissions aux albums photos et à la caméra.', { cancelable: false })
+        this.setState({ loading: false })
       } else {
         const { navigate } = this.props.navigation
         navigate('Prediction', { image: response })
-      }
-      if (this.state.loading) {
-        this.setState({loading: false})
+        this.setState({ loading: false })
       }
     })
   }

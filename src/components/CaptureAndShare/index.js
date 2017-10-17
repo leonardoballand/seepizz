@@ -12,6 +12,8 @@ class CaptureAndShare extends Component {
     this.state = {
       loading: false,
     }
+
+    this._onShareClick = this._onShareClick.bind(this)
   }
 
   _onShareClick() {
@@ -41,7 +43,7 @@ class CaptureAndShare extends Component {
     .catch(e => {
       Alert.alert(
         'Une erreur est survenue',
-        `Le partage du résultat est indisponible actuellement. Veuillez réessayer plus tard !`,
+        `Le partage du résultat est indisponible actuellement. Réessaye plus tard !`,
         [
           {text: 'OK', onPress: () => {
             this.props.onCancel()
