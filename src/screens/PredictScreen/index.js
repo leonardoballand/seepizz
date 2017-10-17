@@ -41,7 +41,6 @@ class PredictScreen extends Component {
     
     clarifai.models.predict(Clarifai.GENERAL_MODEL, file)
       .then(response => {
-        console.log('GENERAL_MODEL response', response)
         const { concepts } = response.outputs[0].data
 
         if (concepts && concepts.length > 0) {
