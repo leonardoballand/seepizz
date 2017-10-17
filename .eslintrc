@@ -4,11 +4,11 @@
       "browser": true
   },
   "plugins": [
-      "react"
+      "react",
+      "react-native"
   ],
   "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended"
+      "plugin:react-native/all"
   ],
   "rules": {
       // overrides
