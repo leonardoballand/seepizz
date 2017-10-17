@@ -16,7 +16,6 @@
 		"react": "16.0.0-alpha.12",
 		"react-native": "0.48.4",
 		"react-native-config": "^0.7.1",
-		"react-native-hockeyapp": "^0.5.1",
 		"react-native-image-picker": "^0.26.7",
 		"react-native-share": "^1.0.21",
 		"react-native-view-shot": "^2.1.0",
@@ -28,6 +27,7 @@
 		"babel-preset-react-native": "4.0.0",
 		"eslint": "^4.8.0",
 		"eslint-plugin-react": "^7.4.0",
+		"eslint-plugin-react-native": "^3.1.0",
 		"jest": "21.2.1",
 		"react-native-dotenv": "^0.1.0",
 		"react-test-renderer": "16.0.0-alpha.12"
